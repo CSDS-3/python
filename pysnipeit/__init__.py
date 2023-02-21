@@ -51,10 +51,17 @@ class SnipeIT(object):
         return response.json() if format else response
 
     def _iter_api(self, uri, params=None, data=None):
-        #TODO
-        pass
+        while True:
+            response = self.invoke_api(uri=uri, params=params, data=data)
+            if results := response.get('rows'):
+                params['offset'] += len(results)
+                for item in results:
+                    yield item
+            else:
+                break
 
-    def _list(self, uri, limit=None, order='asc', offset=None, **kwargs):
+
+    def _list(self, uri, limit=None, order='asc', offset=0, **kwargs):
         params = {'limit':limit,
             'order':order,
             'offset':offset}

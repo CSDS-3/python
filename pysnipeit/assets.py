@@ -5,9 +5,9 @@ class Assets(object):
         self.apibase = apibase
         self.base_uri = '/api/v1/hardware'
     
-    def list(self, limit=None, order='asc', offset=None):
+    def list(self, **kwargs):
         uri = self.base_uri        
-        return self.apibase._list(uri, limit=limit, order=order, offset=offset)
+        return self.apibase._list(uri, **kwargs)
     
     def details(self, id ):
         uri = f'{self.base_uri}/{id}'
