@@ -7,6 +7,8 @@ from .assets import Assets
 from .categories import Categories
 from .status_labels import StatusLabels
 from .users import Users
+from .models import Models
+from .manufacturers import Manufacturers
 
 
 class SnipeIT(object):
@@ -85,3 +87,11 @@ class SnipeIT(object):
     @property
     def users(self):
         return Users(self)
+
+    @property
+    def manufacturers(self):
+        return Manufacturers(self)
+    
+    @property
+    def models(self):
+        return Models(self)
