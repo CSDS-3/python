@@ -6,6 +6,7 @@ import os
 from .assets import Assets
 from .categories import Categories
 from .status_labels import StatusLabels
+from .users import Users
 
 
 class SnipeIT(object):
@@ -52,10 +53,12 @@ class SnipeIT(object):
         #TODO
         pass
 
-    def _list(self, uri, limit=None, order='asc', offset=None):
+    def _list(self, uri, limit=None, order='asc', offset=None, **kwargs):
         params = {'limit':limit,
             'order':order,
             'offset':offset}
+        for k,v in kwargs.items():
+            params.update({k:v})
         return self._iter_api(uri, params=params)
 
 
@@ -70,3 +73,7 @@ class SnipeIT(object):
     @property
     def status_labels(self):
         return StatusLabels(self)
+    
+    @property
+    def users(self):
+        return Users(self)
