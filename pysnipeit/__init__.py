@@ -18,6 +18,7 @@ class SnipeIT(object):
         self._retries = retries
         self._backoff_factor = backoff_factor
         self._status_forcelist = status_forcelist
+        self._build_session()
 
     def _build_headers(self, token):
         tok = token if token else os.getenv('SNIPE_TOK')
