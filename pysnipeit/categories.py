@@ -10,3 +10,7 @@ class Categories(object):
     def details(self, id):
         uri = f'{self.base_uri}/{id}'
         return self.apibase.invoke_api(uri)
+        
+    def update(self, data):
+        uri = self.base_uri
+        self.apibase.invoke_api(uri, method='post', data=data)
