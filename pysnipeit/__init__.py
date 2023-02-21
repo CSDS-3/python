@@ -56,7 +56,7 @@ class SnipeIT(object):
         params = {'limit':limit,
             'order':order,
             'offset':offset}
-        return self.apibase._iter_api(uri, params=params)
+        return self._iter_api(uri, params=params)
 
 
     @property
