@@ -25,6 +25,7 @@ def main():
     infra['models']['category_id'] = categories['id']
     infra['models']['manufacturer_id'] =manufacturers['id']
     models = snipe.models.update(infra.get('models'))
+    print(f'Completed: {manufacturers=} {categories=} {models=}')
     
 
 if __name__ == '__main__':
