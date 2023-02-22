@@ -1,3 +1,2 @@
 # python packages needed
 pytenable
-boto3
