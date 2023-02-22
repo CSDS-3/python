@@ -13,4 +13,4 @@ class Categories(object):
         
     def update(self, data):
         uri = self.base_uri
-        self.apibase._update(uri, data=data)
+        return self.apibase._update(uri, data=data)
