@@ -15,6 +15,6 @@ class Users(object):
     
     def update(self, data):
         uri = self.base_uri
-        self.apibase.invoke_api(uri, method='post', data=data)
+        self.apibase._update(uri, data=data)
 
 

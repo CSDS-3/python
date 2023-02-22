@@ -20,6 +20,8 @@ class SnipeIT(object):
         self._retries = retries
         self._backoff_factor = backoff_factor
         self._status_forcelist = status_forcelist
+        self.log = logging.getLogger(__name__)
+        self.log.addHandler(logging.NullHandler())
         self._build_session()
 
     def _build_headers(self, token):
@@ -70,6 +72,14 @@ class SnipeIT(object):
         for k,v in kwargs.items():
             params.update({k:v})
         return self._iter_api(uri, params=params)
+    
+    def _update(self, uri, data, method='post' ):
+        response = self.invoke_api(uri=uri, method=method, data=data)
+        if result := response.get('status'):
+            if result == 'success':
+                return response['payload']
+        self.log.error(f'Failed Update {result["status"]=} {result["messages"]=}')
+
 
 
     @property
