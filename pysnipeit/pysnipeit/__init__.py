@@ -78,8 +78,8 @@ class SnipeIT(object):
         if result := response.get('status'):
             if result == 'success':
                 return response['payload']
-        self.log.error(f'Failed Update {result["status"]=} {result["messages"]=}')
-
+        self.log.error(f'Failed Update {response["status"]=} {response["messages"]=}')
+        return response
 
 
     @property
