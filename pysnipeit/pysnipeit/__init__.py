@@ -9,7 +9,8 @@ from .status_labels import StatusLabels
 from .users import Users
 from .models import Models
 from .manufacturers import Manufacturers
-
+from .fieldsets import Fieldsets
+from .fields import Fields
 
 class SnipeIT(object):
     def __init__(self, base_url = None, token = None, 
@@ -52,7 +53,7 @@ class SnipeIT(object):
             response.raise_for_status()
         else:
             raise KeyError(f'Wrong Method specified {url} {method}')
-        return response.json() if format else response
+        return self._response_handler(response.json()) if format else response
 
     def _iter_api(self, uri, params=None, data=None):
         while True:
@@ -65,22 +66,24 @@ class SnipeIT(object):
                 break
 
 
-    def _list(self, uri, limit=None, order='asc', offset=0, **kwargs):
+    def _list(self, uri, limit=None, order='asc', offset=0, iter=False, **kwargs):
         params = {'limit':limit,
             'order':order,
             'offset':offset}
         for k,v in kwargs.items():
             params.update({k:v})
+        if not iter:
+            return [i for i in self._iter_api(uri, params=params)]
         return self._iter_api(uri, params=params)
-    
-    def _update(self, uri, data, method='post' ):
-        response = self.invoke_api(uri=uri, method=method, data=data)
-        if result := response.get('status'):
-            if result == 'success':
-                return response['payload']
-        self.log.error(f'Failed Update {response["status"]=} {response["messages"]=}')
-        return response
 
+    def _response_handler(self, response):
+        if response.get('rows'):
+            # paging
+            return response
+        elif response.get('status') != 'success':
+            self.log.error(f'Failed Update {response["status"]=} {response["messages"]=}')
+            raise Exception
+        return response['payload']
 
     @property
     def assets(self):
@@ -105,3 +108,11 @@ class SnipeIT(object):
     @property
     def models(self):
         return Models(self)
+    
+    @property
+    def fieldsets(self):
+        return Fieldsets(self)
+    
+    @property
+    def fields(self):
+        return Fields(self)

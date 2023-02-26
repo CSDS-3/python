@@ -1,13 +1,13 @@
 
 
-class Assets(object):
+class Fields(object):
     def __init__(self, apibase):
         self.apibase = apibase
-        self.base_uri = '/api/v1/hardware'
+        self.base_uri = '/api/v1/fields'
     
     def list(self, iter=False, **kwargs):
         uri = self.base_uri        
-        return self.apibase._list(uri, iter=iter, **kwargs)
+        return self.apibase._list(uri, **kwargs)
     
     def details(self, id ):
         uri = f'{self.base_uri}/{id}'
@@ -20,4 +20,3 @@ class Assets(object):
     def delete(self, id):
         uri = f'{self.base_uri}/{id}'
         return self.apibase.invoke_api(uri, method='delete')
-
