@@ -26,7 +26,7 @@ class Fields(object):
         data = {'fieldset_id': fieldset_id}
         return self.apibase.invoke_api(uri, method='post', data=data)
     
-    def unassociate(self, ,field_id, fieldset_id):
+    def unassociate(self, field_id, fieldset_id):
         uri = f'{self.base_uri}/{field_id}/associate'
         data = {'fieldset_id': fieldset_id}
         return self.apibase.invoke_api(uri, method='post', data=data)
