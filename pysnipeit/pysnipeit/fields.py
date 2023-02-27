@@ -5,7 +5,7 @@ class Fields(object):
         self.apibase = apibase
         self.base_uri = '/api/v1/fields'
     
-    def list(self, iter=False, **kwargs):
+    def list(self, iter=True, **kwargs):
         uri = self.base_uri        
         return self.apibase._list(uri, **kwargs)
     

@@ -64,9 +64,10 @@ class SnipeIT(object):
                     yield item
             else:
                 break
+            if len(results) >= response.get('total'):
+                break
 
-
-    def _list(self, uri, limit=None, order='asc', offset=0, iter=False, **kwargs):
+    def _list(self, uri, limit=None, order='asc', offset=0, iter=True, **kwargs):
         params = {'limit':limit,
             'order':order,
             'offset':offset}
