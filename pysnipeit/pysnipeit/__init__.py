@@ -77,16 +77,13 @@ class SnipeIT(object):
         return self._iter_api(uri, params=params)
 
     def _response_handler(self, response):
-        if response.get('rows'):
+        if response.get('total'):
             # paging
             return response
-        elif response.get('status'):
-            if response['status'] != 'success':
+        elif response.get('status') != 'success':
                 self.log.error(f'Failed Update {response["status"]=} {response["messages"]=}')
                 raise Exception
-            else: 
-                return response['payload']
-        return response
+        return response['payload']
 
     @property
     def assets(self):
