@@ -68,6 +68,7 @@ class SnipeIT(object):
                 break
 
     def _list(self, uri, limit=None, order='asc', offset=0, iter=True, **kwargs):
+        ''' handles iterating or not'''
         params = {'limit':limit,
             'order':order,
             'offset':offset}
@@ -76,6 +77,13 @@ class SnipeIT(object):
         if not iter:
             return [i for i in self._iter_api(uri, params=params)]
         return self._iter_api(uri, params=params)
+    
+    def _update(self, uri, data):
+        ''' handles patching or creating '''
+        if id := data.get('id'):
+            uri = '/'.join([uri, id])
+            return self.invoke_api(uri=uri, method='patch', data=data)
+        return self.invoke_api(uri=uri, method='post', data=data)
 
     def _response_handler(self, response):
         if response.get('total'):
