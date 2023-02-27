@@ -80,10 +80,13 @@ class SnipeIT(object):
         if response.get('rows'):
             # paging
             return response
-        elif response.get('status') != 'success':
-            self.log.error(f'Failed Update {response["status"]=} {response["messages"]=}')
-            raise Exception
-        return response['payload']
+        elif response.get('status'):
+            if response['status'] != 'success':
+                self.log.error(f'Failed Update {response["status"]=} {response["messages"]=}')
+                raise Exception
+            else: 
+                return response['payload']
+        return response
 
     @property
     def assets(self):
