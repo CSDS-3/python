@@ -20,3 +20,13 @@ class Fields(object):
     def delete(self, id):
         uri = f'{self.base_uri}/{id}'
         return self.apibase.invoke_api(uri, method='delete')
+
+    def associate(self, field_id, fieldset_id):
+        uri = f'{self.base_uri}/{field_id}/associate'
+        data = {'fieldset_id': fieldset_id}
+        return self.apibase.invoke_api(uri, method='post', data=data)
+    
+    def unassociate(self, ,field_id, fieldset_id):
+        uri = f'{self.base_uri}/{field_id}/associate'
+        data = {'fieldset_id': fieldset_id}
+        return self.apibase.invoke_api(uri, method='post', data=data)

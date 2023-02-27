@@ -16,6 +16,16 @@ infra = {
             {
                 'name': 'AWS EC2',
                 
+            },
+        'fieldset':
+            {
+                'name':'Computers'
+            },
+        'fields':
+            {
+                'name':'OS',
+                'element': 'text',
+                'format' : 'ANY'
             }
         }
 
@@ -25,6 +35,9 @@ def main():
     infra['models']['category_id'] = categories['id']
     infra['models']['manufacturer_id'] =manufacturers['id']
     models = snipe.models.update(infra.get('models'))
+    fields = snipe.fields.update(infra.get('fields'))
+    fieldsets = snipe.fieldsets.update(infra.get('fieldsets'))
+    snipe.fields.associate(fieldsets['id'])
     print(f'Completed: {manufacturers=} {categories=} {models=}')
     
 
