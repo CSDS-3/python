@@ -20,4 +20,19 @@ class Assets(object):
     def delete(self, id):
         uri = f'{self.base_uri}/{id}'
         return self.apibase.invoke_api(uri, method='delete')
+    
+    def get_by_tag(self, tag):
+        uri = f'{self.base_uri}/bytag/{tag}'
+        return self.apibase.invoke_api(uri)
+    
+    def get_by_serial(self, serial_number):
+        uri = f'{self.base_uri}/byserial/{serial_number}'
+        return self.apibase.invoke_api(uri)
+    
+    def restore(self, id):
+        uri = f'{self.base_uri}/{id}'
+        return self.apibase.invoke_api(uri, method='post')
+
+
+
 
