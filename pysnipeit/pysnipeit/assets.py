@@ -15,7 +15,7 @@ class Assets(object):
     
     def update(self, data):
         uri = self.base_uri
-        return self.apibase._update(uri, method='post', data=data)
+        return self.apibase._update(uri, data=data)
     
     def delete(self, id):
         uri = f'{self.base_uri}/{id}'
