@@ -81,7 +81,7 @@ class SnipeIT(object):
     def _update(self, uri, data):
         ''' handles patching or creating '''
         if id := data.get('id'):
-            uri = '/'.join([uri, id])
+            uri = f'{uri}/{id}'
             return self.invoke_api(uri=uri, method='patch', data=data)
         return self.invoke_api(uri=uri, method='post', data=data)
 
