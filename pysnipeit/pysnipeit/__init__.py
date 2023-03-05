@@ -67,7 +67,7 @@ class SnipeIT(object):
             if len(results) >= response.get('total'):
                 break
 
-    def _list(self, uri, limit=None, order='asc', offset=0, iter=True, **kwargs):
+    def _list(self, uri, limit=None, order='asc', offset=0, iter=False, **kwargs):
         ''' handles iterating or not'''
         params = {'limit':limit,
             'order':order,
