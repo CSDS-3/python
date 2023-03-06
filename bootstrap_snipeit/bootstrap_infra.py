@@ -17,7 +17,7 @@ infra = {
                 'name': 'AWS EC2',
                 
             },
-        'fieldset':
+        'fieldsets':
             {
                 'name':'Computers'
             },
@@ -34,7 +34,7 @@ def main():
     categories = snipe.categories.update(infra.get('categories'))  
     fields = snipe.fields.update(infra.get('fields'))
     fieldsets = snipe.fieldsets.update(infra.get('fieldsets'))
-    snipe.fields.associate(fieldsets['id'])
+    snipe.fields.associate(field_id=fields['id'], fieldset_id=fieldsets['id'])
     infra['models']['category_id'] = categories['id']
     infra['models']['manufacturer_id'] =manufacturers['id']
     infra['models']['fieldset_id'] = fieldsets['id']
