@@ -86,7 +86,7 @@ class SnipeIT(object):
         return self.invoke_api(uri=uri, method='post', data=data)
 
     def _response_handler(self, response):
-        if response.get('total'):
+        if 'total' in response:
             # paging
             return response
         elif response.get('status') != 'success':
